@@ -2,6 +2,8 @@
 import { createApp } from 'vue'
 // 导入全局的css样式文件,该文件中的样式会作用到所有的.vue元素上
 import './style.css'
+// 导入全局的css样式文件
+import './style/test.css';
 // 导入了一个App.vue的组件,并起了一个别名 App
 import App from './App.vue'
 
