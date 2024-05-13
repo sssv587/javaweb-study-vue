@@ -1,10 +1,15 @@
 <script setup>
+// 接收父组件的参数
+import { defineProps } from 'vue'
 
+defineProps({
+    message: String
+})
 </script>
 
 <template>
     <div>
-        这里是展示主要内容
+        {{ message }}
     </div>
 </template>
 
