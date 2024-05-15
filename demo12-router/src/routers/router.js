@@ -15,23 +15,38 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            component: Home
+            components: {
+                homeView: Home
+            }
         },
         {
             path: "/home",
-            component: Home
+            components: {
+                default: Home,
+                homeView: Home
+            }
         },
         {
             path: "/list",
-            component: List
+            components: {
+                listView: List
+            }
         },
         {
             path: "/add",
-            component: Add
+            components: {
+                addView: Add
+            }
         },
         {
             path: "/update",
-            component: Update
+            components: {
+                updateView: Update
+            }
+        },
+        {
+            path: "/showAll",
+            redirect: "/list"
         }
     ]
 })
