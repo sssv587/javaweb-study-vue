@@ -5,7 +5,7 @@ import Regist from './../components/Regist.vue'
 import ShowSchedule from './../components/ShowSchedule.vue'
 
 const router = createRouter({
-    history: createWebHashHistory,
+    history: createWebHashHistory(),
     routes: [
         {
             path: "/",
