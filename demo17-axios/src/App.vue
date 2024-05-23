@@ -4,20 +4,34 @@ import { reactive, ref } from 'vue';
 
 let message = reactive({
   "code": 1,
-  "content" : "xxxx"
+  "content": "xxxx"
 })
 
 function getLoveMessage() {
   // 使用axios发送请求获取土味情话
   // axios({设置请求参数}) 请求三要素 1、请求的url 2、请求的方式 3、请求的参数 keyvalue...
   let promise = axios({
-    method: "get",
-    url: "https://api.uomg.com/api/rand.qinghua?format=json",
-    data: { //如果请求方式是get,则data中的数据会以键值对形式放在url后
-      //如果请求方式是post,则data中的数据会以JSON形式放入请求体
-
+    method: "post",
+    url: "https://api.uomg.com/api/rand.qinghua",
+    data: { //如果请求方式是get,需要通过params进行发送
+      //如果请求方式是post,并且使用data,数据会以JSON形式放入请求体
+      // 这里的数据会放入请求体,前提是请求方式得是post
+    },
+    params: {
+      // 都是以键值对方式将数据放入url后
+      format: "json",
+      username: "zhangsan"
     }
   })
+
+  // let promise = axios({
+  //   method: "post",
+  //   url: "https://api.uomg.com/api/rand.qinghua",
+  //   data : {
+  //     format: "json",
+  //     username: "zhangsan"
+  //   }
+  // })
 
   promise.then(
     function (response) {
@@ -37,8 +51,8 @@ function getLoveMessage() {
       Object.assign(message, response.data)
     }
   ).catch(
-    function () {
-
+    function (error) {
+      console.log(error)
     }
   )
 }
