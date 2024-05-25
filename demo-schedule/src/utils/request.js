@@ -3,7 +3,6 @@ import axios from 'axios'
 //  创建instance实例
 const instance = axios.create({
     baseURL: 'http://localhost:8080/'
-
 })
 
 //  添加请求拦截
