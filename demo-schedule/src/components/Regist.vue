@@ -1,5 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
+// 导入发送请求的axios对象
+import request from '../utils/request'
 // 响应式数据,保存用户输入的表单信息
 let registUser = reactive({
     username: '',
@@ -13,7 +15,7 @@ let usernameMsg = ref('')
 let userPwdMsg = ref('')
 
 // 校验用户名的方法
-function checkUsername() {
+async function checkUsername() {
     // 定义正则
     let usernameReg = /^[a-zA-Z0-9]{5,10}$/
     // 校验
@@ -22,6 +24,10 @@ function checkUsername() {
         usernameMsg.value = "不合法"
         return false
     }
+    // 继续校验用户名是否被占用
+    let response = await request.post(`http://localhost:8080/user/checkUsernameUsed?username=${registUser.username}`)
+    console.log(response)
+
     // 通过校验
     usernameMsg.value = "OK"
     return true
