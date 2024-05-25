@@ -25,11 +25,14 @@ async function checkUsername() {
         return false
     }
     // 继续校验用户名是否被占用
-    let response = await request.post(`http://localhost:8080/user/checkUsernameUsed?username=${registUser.username}`)
-    console.log(response)
+    let { data } = await request.post(`user/checkUsernameUsed?username=${registUser.username}`)
+    if (data.code != 200) {
+        usernameMsg.value = "用户名已占用"
+        return false
+    }
 
     // 通过校验
-    usernameMsg.value = "OK"
+    usernameMsg.value = "可用"
     return true
 }
 // 校验密码的方法
