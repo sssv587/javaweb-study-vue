@@ -8,6 +8,8 @@
         <router-link to="/list">list</router-link>
         <hr>
         <router-view></router-view>
+        <hr>
+        <router-view name="list"></router-view>
     </div>
 </template>
 

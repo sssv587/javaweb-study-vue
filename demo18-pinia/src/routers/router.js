@@ -8,15 +8,18 @@ const router = createRouter({
     routes: [
         {
             path: "/list",
-            component : List
+            component: List
         },
         {
             path: "/operate",
-            component : Operate
+            components: {
+                default: Operate,
+                list: List
+            }
         },
         {
             path: "/",
-            component : Operate
+            component: Operate
         }
     ]
 })
