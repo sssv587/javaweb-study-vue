@@ -41,6 +41,17 @@ async function updateItem(index) {
         alert("更新失败")
     }
 }
+
+async function removeItem(index) {
+    let sid = schedule.itemList[index].sid
+    let { data } = await request.get(`schedule/removeSchedule`, { params: { "sid": sid } })
+    if (data.code == 200) {
+        showSchedule()
+        alert("删除成功")
+    } else {
+        alert("删除失败")
+    }
+}
 </script>
 
 <template>
@@ -63,7 +74,7 @@ async function updateItem(index) {
                     <input type="radio" value="1" v-model="item.completed">已完成
                 </td>
                 <td class="buttonContainer">
-                    <button class="btn1">删除</button>
+                    <button class="btn1" @click="removeItem(index)">删除</button>
                     <button class="btn1" @click="updateItem(index)">保存修改</button>
                 </td>
             </tr>
