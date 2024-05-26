@@ -6,26 +6,7 @@ export const defineSchedule = defineStore(
     {
         state: () => {
             return {
-                itemList: [
-                    {
-                        sid: 1,
-                        uid: 1,
-                        title: "学习java",
-                        completed: 0
-                    },
-                    {
-                        sid: 1,
-                        uid: 1,
-                        title: "学习java",
-                        completed: 0
-                    },
-                    {
-                        sid: 1,
-                        uid: 1,
-                        title: "学习java",
-                        completed: 0
-                    }
-                ]
+                itemList: []
             }
         },
         getters: {

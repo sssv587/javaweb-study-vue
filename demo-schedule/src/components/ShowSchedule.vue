@@ -1,5 +1,24 @@
 <script setup>
+// 导入pinia数据
+import { defineUser } from '../store/userStore.js'
+import { defineSchedule } from '../store/scheduleStore.js'
+let sysUser = defineUser()
+let schedule = defineSchedule()
 
+import { onMounted, ref, reactive, onUpdated } from 'vue';
+import request from './../utils/request.js'
+
+// 挂载完毕后,立刻查询当前用户的所有日程信息,赋值给pinia
+onMounted(async () => {
+    showSchedule()
+})
+
+// 查询当前用户所有日程信息 并展示到视图上的方法
+async function showSchedule() {
+    // 发送异步请求,获得当前用户的所有日程记录
+    let { data } = await request.get("schedule/findAllSchedule", { params: { 'uid': sysUser.uid } })
+    schedule.itemList = data.data.itemList
+}
 </script>
 
 <template>
@@ -12,10 +31,15 @@
                 <th>进度</th>
                 <th>操作</th>
             </tr>
-            <tr class="ltr">
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr class="ltr" v-for="item, index in schedule.itemList" :key="index">
+                <td v-text="index + 1"></td>
+                <td>
+                    <input type="text" v-model="item.title">
+                </td>
+                <td>
+                    <input type="radio" value="0" v-model="item.completed">未完成
+                    <input type="radio" value="1" v-model="item.completed">已完成
+                </td>
                 <td class="buttonContainer">
                     <button class="btn1">删除</button>
                     <button class="btn1">保存修改</button>
@@ -72,4 +96,5 @@
 
 .buttonContainer {
     text-align: center;
-}</style>
+}
+</style>
