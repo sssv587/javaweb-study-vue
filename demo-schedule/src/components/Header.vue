@@ -22,7 +22,7 @@ function logout() {
     <div>
         <h1 class="ht">欢迎使用日程管理系统</h1>
         <div>
-            <div class="optionDiv" v-if="user.username == ''">
+            <div class="optionDiv" v-if="sysUser.username == ''">
                 <router-link to="/login">
                     <button class="b1s">登录</button>
                 </router-link>
@@ -68,7 +68,7 @@ function logout() {
 }
 
 .optionDiv {
-    width: 300px;
+    width: 400px;
     float: right;
 }
 </style>
