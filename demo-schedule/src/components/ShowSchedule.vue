@@ -19,6 +19,28 @@ async function showSchedule() {
     let { data } = await request.get("schedule/findAllSchedule", { params: { 'uid': sysUser.uid } })
     schedule.itemList = data.data.itemList
 }
+
+// 为当前用户增加一个空的日程记录
+async function addItem() {
+    let { data } = await request.get('schedule/addDefaultSchedule', { params: { 'uid': sysUser.uid } })
+    if (data.code == 200) {
+        // 增加成功,刷新页面数据
+        showSchedule()
+    } else {
+        alert("增加失败")
+    }
+}
+
+async function updateItem(index) {
+    // 找到要修改的数据 发送给服务端,更新进入数据库即可
+    let { data } = await request.post("schedule/updateSchedule", schedule.itemList[index])
+    if (data.code == 200) {
+        showSchedule()
+        alert("更新成功")
+    } else {
+        alert("更新失败")
+    }
+}
 </script>
 
 <template>
@@ -42,12 +64,12 @@ async function showSchedule() {
                 </td>
                 <td class="buttonContainer">
                     <button class="btn1">删除</button>
-                    <button class="btn1">保存修改</button>
+                    <button class="btn1" @click="updateItem(index)">保存修改</button>
                 </td>
             </tr>
             <tr class="ltr buttonContainer">
                 <td colspan="4">
-                    <button class="btn1">新增日程</button>
+                    <button class="btn1" @click="addItem()">新增日程</button>
                 </td>
 
             </tr>
